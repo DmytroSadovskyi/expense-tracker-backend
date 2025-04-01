@@ -4,6 +4,7 @@ import Joi from 'joi';
 
 const expenseSchema = new Schema(
   {
+    type: { type: String, default: 'витрата' },
     category: {
       type: String,
       required: true,
@@ -36,6 +37,7 @@ expenseSchema.post('save', handleMongooseError);
 const Expense = model('expense', expenseSchema);
 
 const addSchema = Joi.object({
+  type: Joi.string().default('витрата'),
   category: Joi.string().required(),
   description: Joi.string().required(),
   amount: Joi.number().required(),
