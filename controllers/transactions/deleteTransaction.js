@@ -1,9 +1,9 @@
-import { Income } from '../../models/income.js';
+import { Transaction } from '../../models/transaction.js';
 import { HttpError } from '../../helpers/index.js';
 
-const deleteIncome = async (req, res) => {
+const deleteTransaction = async (req, res) => {
   const { id } = req.params;
-  const result = await Income.findByIdAndDelete(id);
+  const result = await Transaction.findByIdAndDelete(id);
 
   if (!result) {
     throw HttpError(404, 'Not found');
@@ -14,4 +14,4 @@ const deleteIncome = async (req, res) => {
   });
 };
 
-export default deleteIncome;
+export default deleteTransaction;

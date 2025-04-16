@@ -2,9 +2,11 @@ import { Schema, model } from 'mongoose';
 import { handleMongooseError } from '../helpers/index.js';
 import Joi from 'joi';
 
-const incomeSchema = new Schema(
+const typeEnum = ['витрата', 'дохід'];
+
+const transactionSchema = new Schema(
   {
-    type: { type: String, default: 'дохід' },
+    type: { type: String, enum: typeEnum, default: 'дохід' },
     category: {
       type: String,
       required: true,
@@ -32,8 +34,9 @@ const incomeSchema = new Schema(
   },
 );
 
-incomeSchema.post('save', handleMongooseError);
-const Income = model('income', incomeSchema);
+transactionSchema.post('save', handleMongooseError);
+
+const Transaction = model('transaction', transactionSchema);
 
 const addSchema = Joi.object({
   type: Joi.string().default('дохід'),
@@ -43,4 +46,4 @@ const addSchema = Joi.object({
   date: Joi.date().default(Date.now),
 });
 
-export { Income, addSchema };
+export { Transaction, addSchema };

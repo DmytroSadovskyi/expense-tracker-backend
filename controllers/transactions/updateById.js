@@ -1,6 +1,5 @@
-import { Expense, addSchema } from '../../models/expense.js';
+import { Transaction, addSchema } from '../../models/transaction.js';
 import { HttpError } from '../../helpers/index.js';
-import UpdateById from '../incomes/updateById.js';
 
 const updateById = async (req, res) => {
   const { error } = addSchema.validate(req.body);
@@ -8,9 +7,11 @@ const updateById = async (req, res) => {
   if (error) {
     throw HttpError(400, 'missing fields');
   }
-  const { id } = req.params;
 
-  const result = await Expense.findByIdAndUpdate(id, req.body, { new: true });
+  const { id } = req.params;
+  const result = await Transaction.findByIdAndUpdate(id, req.body, {
+    new: true,
+  });
 
   if (!result) {
     throw HttpError(404, 'Not found');

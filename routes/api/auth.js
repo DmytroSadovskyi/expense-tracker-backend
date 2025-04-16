@@ -17,6 +17,7 @@ authRouter.post(
   validateBody(schemas.loginSchema),
   ctrlWrapper(ctrl.login),
 );
+authRouter.get('/current', authenticate, ctrlWrapper(ctrl.getCurrent));
 
 authRouter.post('/logout', authenticate, ctrlWrapper(ctrl.logout));
 
