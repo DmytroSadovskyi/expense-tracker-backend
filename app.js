@@ -2,8 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import logger from 'morgan';
+import swaggerDocs from './swagger.js';
 import authRouter from './routes/api/auth.js';
-
 import transactionRouter from './routes/api/transactions.js';
 
 dotenv.config();
@@ -22,6 +22,8 @@ app.use('/api/transactions', transactionRouter);
 app.get('/', (req, res) => {
   res.json('Hello from server');
 });
+
+swaggerDocs(app);
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found' });
